@@ -1,0 +1,74 @@
+
+player = 1
+board = [['-','-','-'],['-','-','-'],['-','-','-']]
+def printBoard() -> int:
+    i = 0
+    while i < 3:
+        print(board[i][0],board[i][1],board[i][2])
+        # print("\n")
+        i = i + 1
+    return 0
+global i
+global j
+def playerMove() -> int:
+    global player
+    turn1 = int(input("its player's " + str(player) + " turn! [row] ")) -1
+    turn2 = int(input("its player's " + str(player) + " turn! [col] ")) -1
+    valid = False
+    while valid == False:
+        if turn1 < 3 and turn2 < 3 and board[turn1][turn2] == '-':
+            valid = True
+            if player == 1:
+                board[turn1][turn2] = 'X'
+                # print(board[turn1][turn2])
+                printBoard()
+                checkWin()
+                return 0
+            else:
+                board[turn1][turn2] = 'O'
+                printBoard()
+                checkWin()
+                return 0
+        else:
+            print("move is invalid pls try again")
+            turn1 = int(input("its player's " + str(player) + " turn! [row] ")) -1
+            turn2 = int(input("its player's " + str(player) + " turn! [col] ")) -1
+def gameStarted() -> int:
+    printBoard()
+    global gamesOn
+    global player
+    while gamesOn == True:
+        playerMove()
+    return 0
+gamesOn = True
+def checkWin() -> int:
+    global gamesOn
+    global player
+    i = 0
+    while i < 3:
+        if board[0][i] == board[1][i] and board[0][i] == board[2][i] and board[0][i] != '-':
+            print("the winner is: player " + str(player))
+            gamesOn = False
+            return 1
+        i = i + 1
+    i = 0
+    while i < 3:
+        if board[i][0] == board[i][1] and board[i][0] == board[i][2] and board[i][0] != '-':
+            print("the winner is: player " + str(player))
+            gamesOn = False
+            return 1
+        i = i + 1
+    if board[0][0] == board[1][1] and board[0][0] == board[2][2] and board[0][0] != '-':
+        print("the winner is: player " + str(player))
+        gamesOn = False
+        return 1
+    if board[0][2] == board[2][0] and board[0][2] == board[2][2] and board[2][0] != '-':
+        print("the winner is: player " + str(player))
+        gamesOn = False
+        return 1
+    if player == 1:
+        player = 2
+    else:
+        player = 1
+    return 0
+gameStarted()
