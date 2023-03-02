@@ -16,7 +16,7 @@ def playerMove() -> int:
     turn2 = int(input("its player's " + str(player) + " turn! [col] ")) -1
     valid = False
     while valid == False:
-        if turn1 < 3 and turn2 < 3 and turn1 > 0 and turn2 > 0 and board[turn1][turn2] == '-':
+        if turn1 < 3 and turn2 < 3 and turn1 > -1 and turn2 > -1 and board[turn1][turn2] == '-':
             valid = True
             if player == 1:
                 board[turn1][turn2] = 'X'
